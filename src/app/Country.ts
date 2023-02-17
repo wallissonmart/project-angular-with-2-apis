@@ -1,8 +1,6 @@
 export interface Country {
-  translations: {
-    por: {
-      common: string;
-    };
+  name: {
+    common: string;
   };
   capital: string;
   flags: {

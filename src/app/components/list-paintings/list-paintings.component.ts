@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { ListPaintingsService } from 'src/app/services/list-paintings.service';
-import { Subject,timer } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-list-paintings',
@@ -10,10 +10,10 @@ import { Subject,timer } from 'rxjs';
 })
 export class ListPaintingsComponent {
   apiImgUrl = 'https://www.artic.edu/iiif/2/';
-  badReq = false;
-  error = new Subject<boolean>;
+  error = new Subject<boolean>();
   paintings: any[] = [];
   arrSearch: any[] = [];
+  noSearch = false;
   faSearch = faSearch;
 
   constructor(private listPaintingsService: ListPaintingsService) {
@@ -27,7 +27,7 @@ export class ListPaintingsComponent {
       },
       error: (e) => {
         console.log('deu ruim', e);
-        this.error.next(true)
+        this.error.next(true);
       },
     });
   }
@@ -63,16 +63,16 @@ export class ListPaintingsComponent {
       ? this.getPaintings()
       : this.listPaintingsService.getPaintingsName(name).subscribe({
           next: (data) => {
-            console.log(data)
             data.data.length == 0
-              ? (this.paintings = [])
-              : data.data.map((item: any) => this.details(item.api_link));
-              this.badReq = false;
+              ? ((this.paintings = []), (this.noSearch = true))
+              : data.data.map(
+                  (item: any) => this.details(item.api_link),
+                  (this.noSearch = false)
+                );
           },
           error: (e) => {
-            console.log('deu ruim', e), (this.badReq = true);
+            console.log('deu ruim', e);
           },
         });
-
   }
 }

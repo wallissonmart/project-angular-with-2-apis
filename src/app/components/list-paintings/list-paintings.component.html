@@ -19,11 +19,11 @@
       <h4>Erro ao carregar obras. Tente novamente mais tarde!</h4>
     </div>
     <ng-template #loading>
-      <div *ngIf="paintings.length > 0; else noSearch">
-        <h4>Carregando...</h4>
+      <div *ngIf="noSearch; else loadOn">
+        <h4>Obra ou pintor não encontrado :(</h4>
       </div>
     </ng-template>
-    <ng-template #noSearch>
-      <h4>Obra ou pintor não encontrado...</h4>
+    <ng-template #loadOn>
+      <h4>Carregando...</h4>
     </ng-template>
   </ng-template>

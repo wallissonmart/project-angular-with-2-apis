@@ -15,6 +15,7 @@ export class ListCountriesComponent {
   countries: Country[] = [];
   countriesForSearch: Country[] = [];
   faSearch = faSearch;
+  noSearch = false;
 
   constructor(private listCountriesService: ListCountriesService) {
     this.getCountries();
@@ -64,9 +65,9 @@ export class ListCountriesComponent {
     name === ''
       ? (this.countries = this.countriesForSearch)
       : (this.countries = this.countries.filter((countrie) => {
-          return countrie.translations.por.common
+          return countrie.name.common
             .toLowerCase()
             .includes(name.toLowerCase());
-        }));
+        })).length === 0 && (this.noSearch = true);
   }
 }

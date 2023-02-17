@@ -7,7 +7,7 @@
 <div id="container-list-countries">
   <ul *ngIf="countries.length > 0; else noCountries">
     <li *ngFor="let country of shuffleArray(countries).slice(0, 10)">
-      <h3>País: {{ country.translations.por.common }} </h3>
+      <h3>País: {{ country.name.common }} </h3>
       <h3>Capital: {{ country.capital }}</h3>
       <img src="{{ country.flags.png }}" />
     </li>
@@ -18,11 +18,11 @@
     <h4>Erro ao carregar países. Tente novamente mais tarde!</h4>
   </div>
   <ng-template #loading>
-    <div *ngIf="countries.length > 0; else noSearch">
-      <h4>Carregando...</h4>
+    <div *ngIf="noSearch; else loadOn">
+      <h4>País não encontrado :(</h4>
     </div>
-  </ng-template>
-  <ng-template #noSearch>
-    <h4>País não encontrado...</h4>
+    <ng-template #loadOn>
+      <h4>Carregando...</h4>
+    </ng-template>
   </ng-template>
 </ng-template>
