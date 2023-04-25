@@ -1,17 +1,31 @@
 <div class="input-container">
   <div class="input-box">
-    <input type="text" placeholder="Digite o nome de algum pintor ou pintura" id="paintingname" name="paintingname"
-      #paintingname />
-    <fa-icon class="fa-icon" (click)="search(paintingname.value)" [icon]="faSearch" />
+    <input
+      type="text"
+      placeholder="Digite o nome de algum pintor ou pintura"
+      id="paintingname"
+      name="paintingname"
+      #paintingname
+    />
+    <fa-icon
+      class="fa-icon"
+      (click)="search(paintingname.value)"
+      [icon]="faSearch"
+    />
   </div>
 </div>
 <div id="container-list-paintings">
   <ul *ngIf="paintings.length > 0; else noPaintings">
     <li *ngFor="let painting of paintings">
       <h3>Obra: {{ painting.title }}</h3>
-      <h3>Pintor: {{ painting.artist_title ? painting.artist_title : '---' }}</h3>
+      <h3>
+        Pintor: {{ painting.artist_title ? painting.artist_title : "---" }}
+      </h3>
       <h3>Ano: {{ painting.date_display }}</h3>
-      <img src="{{ apiImgUrl + painting.image_id + '/full/843,/0/default.jpg'}}" alt="{{ painting.title }}" />
+      <img
+        src="{{ apiImgUrl + painting.image_id + '/full/843,/0/default.jpg' }}"
+        alt="{{ painting.title }}"
+      />
     </li>
   </ul>
   <ng-template id="no-paintings" #noPaintings>
@@ -27,3 +41,4 @@
       <h4>Carregando...</h4>
     </ng-template>
   </ng-template>
+</div>
